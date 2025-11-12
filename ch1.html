@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据结构与基础算法（C++版）- 章节标题</title>
+    <!-- 复用主页的样式库 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Markdown渲染相关库 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Markdown转HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script> <!-- 代码高亮 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"> <!-- 代码主题 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script> <!-- 可选：图表支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script> <!-- LaTeX公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script> <!-- 自动渲染公式 -->
+    
+    <!-- 复用主页的Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        dark: '#1D2129',
+                        light: '#F2F3F5',
+                        accent: '#FF7D00'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Consolas', 'Monaco', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .nav-active {
+                @apply bg-primary/10 text-primary border-l-4 border-primary;
+            }
+            .transition-nav {
+                @apply transition-all duration-300 ease-in-out;
+            }
+            /* Markdown内容样式 */
+            .markdown-content h1 { @apply text-3xl font-bold my-6 text-dark; }
+            .markdown-content h2 { @apply text-2xl font-bold my-5 text-dark; }
+            .markdown-content h3 { @apply text-xl font-bold my-4 text-dark; }
+            .markdown-content p { @apply my-4 text-gray-700 leading-relaxed; }
+            .markdown-content ul { @apply list-disc pl-6 my-4 text-gray-700; }
+            .markdown-content ol { @apply list-decimal pl-6 my-4 text-gray-700; }
+            .markdown-content a { @apply text-primary hover:underline; }
+            .markdown-content blockquote { @apply border-l-4 border-gray-300 pl-4 py-1 my-4 text-gray-600; }
+            .markdown-content img { @apply max-w-full mx-auto my-6 rounded-lg shadow-sm; }
+            .markdown-content pre { @apply my-6 p-4 rounded-lg bg-gray-900 text-gray-100 overflow-x-auto; }
+            .markdown-content code { @apply font-mono text-sm; }
+            .markdown-content table { @apply w-full my-6 border-collapse; }
+            .markdown-content th { @apply bg-gray-100 p-3 border border-gray-300; }
+            .markdown-content td { @apply p-3 border border-gray-300; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <div class="flex h-screen overflow-hidden">
+        <!-- 侧边导航栏（与主页完全一致） -->
+        <aside id="sidebar" class="w-64 bg-white shadow-lg z-10 hidden md:block transition-nav">
+            <div class="p-6 border-b border-gray-200">
+                <h1 class="text-xl font-bold text-primary flex items-center">
+                    <i class="fa fa-code-fork mr-3"></i>
+                    数据结构与算法
+                </h1>
+                <p class="text-sm text-gray-500 mt-1">C++版教程</p>
+            </div>
+            
+            <nav class="p-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="index.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-home w-5 text-center mr-3"></i>
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch1.html" class="nav-active flex items-center px-4 py-3 text-sm rounded-lg transition-nav">
+                            <i class="fa fa-info-circle w-5 text-center mr-3"></i>
+                            第一章：链表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch2.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-list w-5 text-center mr-3"></i>
+                            第二章：线性表
+                        </a>
+                    </li>
+                    <!-- 其他章节导航（与主页保持一致） -->
+                    <li>
+                        <a href="ch3.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-stack-overflow w-5 text-center mr-3"></i>
+                            第三章：栈与队列
+                        </a>
+                    </li>
+                    <!-- 省略后续章节... -->
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- 顶部导航（与主页一致） -->
+            <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+                <div class="text-lg font-medium text-gray-800">数据结构与基础算法（C++版）</div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-primary transition-colors">
+                        <i class="fa fa-search text-lg"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-primary transition-colors">
+                        <i class="fa fa-user-circle text-lg"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Markdown内容渲染区域 -->
+            <div class="flex-1 overflow-y-auto p-6 md:p-10 bg-gray-50">
+                <div class="max-w-4xl mx-auto">
+                    <!-- 章节标题 -->
+                    <div class="mb-10">
+                        <h1 class="text-3xl md:text-4xl font-bold text-dark mb-2">第一章：算法基础</h1>
+                        <div class="h-1 w-20 bg-primary rounded"></div>
+                    </div>
+                    
+                    <!-- Markdown内容将被渲染到这里 -->
+                    <div id="markdown-content" class="markdown-content"></div>
+                </div>
+            </div>
+            
+            <!-- 页脚（与主页一致） -->
+            <footer class="bg-white border-t border-gray-200 py-4 px-6 text-center text-gray-500 text-sm">
+                <p>© 2023 数据结构与基础算法（C++版）教程 | 学习资源网站</p>
+            </footer>
+        </main>
+    </div>
+    
+    <!-- 移动端侧边栏遮罩（与主页一致） -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-10 hidden md:hidden"></div>
+    
+    <script>
+        // 1. 移动端侧边栏交互（复用主页逻辑）
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('absolute');
+            sidebar.classList.toggle('top-0');
+            sidebar.classList.toggle('left-0');
+            sidebar.classList.toggle('h-full');
+            sidebarOverlay.classList.toggle('hidden');
+        });
+        
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.add('hidden');
+            sidebarOverlay.classList.add('hidden');
+        });
+        
+        // 2. 加载并渲染Markdown内容
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 假设当前页面是ch1.html，对应的Markdown文件是ch1.md
+            const mdFile = '链表.md'; // 每个章节页面修改此处文件名
+            
+            try {
+                // 加载Markdown文件
+                const response = await fetch(mdFile);
+                const markdownText = await response.text();
+                
+                // 将Markdown转换为HTML
+                const htmlContent = marked.parse(markdownText);
+                document.getElementById('markdown-content').innerHTML = htmlContent;
+                
+                // 高亮代码块
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+                
+                // 渲染LaTeX公式（支持$...$和$$...$$格式）
+                renderMathInElement(document.getElementById('markdown-content'), {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }, // 行内公式
+                        { left: '$$', right: '$$', display: true } // 块级公式
+                    ]
+                });
+                
+            } catch (error) {
+                document.getElementById('markdown-content').innerHTML = `
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                        加载内容失败：${error.message}
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
