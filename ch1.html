@@ -9,14 +9,26 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
     <!-- Markdown渲染相关库 -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.2/marked.min.js"></script> <!-- Markdown转HTML -->
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script> <!-- 代码高亮 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"> <!-- 代码主题 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script> <!-- 可选：图表支持 -->
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script> <!-- LaTeX公式渲染 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script> <!-- 自动渲染公式 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/marked@4.0.2/marked.min.js"></script>  Markdown转HTML -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>  代码高亮 -->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css">  代码主题 -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>  可选：图表支持 -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script> <!-- LaTeX公式渲染 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"> -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>  自动渲染公式 -->
     
+    <!-- Markdown渲染 -->
+    <script src="https://cdn.bytedance.com/marked/4.0.2/marked.min.js"></script>
+    <!-- 代码高亮 -->
+    <script src="https://cdn.bytedance.com/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bytedance.com/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <!-- LaTeX公式 -->
+    <script src="https://cdn.bytedance.com/katex/0.16.8/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bytedance.com/katex/0.16.8/katex.min.css">
+    <script src="https://cdn.bytedance.com/katex/0.16.8/contrib/auto-render.min.js"></script>
+    <!-- 图表（可选，如用不到可删除） -->
+    <script src="https://cdn.bytedance.com/chart.js/4.4.8/chart.umd.min.js"></script>
+
     <!-- 复用主页的Tailwind配置 -->
     <script>
         tailwind.config = {
