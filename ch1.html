@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
     <!-- Markdown渲染相关库 -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Markdown转HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.2/marked.min.js"></script> <!-- Markdown转HTML -->
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script> <!-- 代码高亮 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"> <!-- 代码主题 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script> <!-- 可选：图表支持 -->
@@ -211,35 +211,31 @@
         
         // 2. 加载并渲染Markdown内容
         document.addEventListener('DOMContentLoaded', async () => {
-            // 假设当前页面是ch1.html，对应的Markdown文件是ch1.md
-            const mdFile = './list.md'; // 每个章节页面修改此处文件名
-            
+            const mdFile = 'list.md'; // 确认路径正确
             try {
-                // 加载Markdown文件
                 const response = await fetch(mdFile);
-                const markdownText = await response.text();
+                if (!response.ok) throw new Error('文件不存在');
                 
-                // 将Markdown转换为HTML
-                const htmlContent = marked.parse(markdownText);
+                const markdownText = await response.text();
+                const htmlContent = marked.parse(markdownText); // 现在marked已定义
                 document.getElementById('markdown-content').innerHTML = htmlContent;
                 
-                // 高亮代码块
-                document.querySelectorAll('pre code').forEach((block) => {
+                // 代码高亮
+                document.querySelectorAll('pre code').forEach(block => {
                     hljs.highlightElement(block);
                 });
                 
-                // 渲染LaTeX公式（支持$...$和$$...$$格式）
+                // 公式渲染
                 renderMathInElement(document.getElementById('markdown-content'), {
                     delimiters: [
-                        { left: '$', right: '$', display: false }, // 行内公式
-                        { left: '$$', right: '$$', display: true } // 块级公式
+                        { left: '$', right: '$', display: false },
+                        { left: '$$', right: '$$', display: true }
                     ]
                 });
-                
             } catch (error) {
                 document.getElementById('markdown-content').innerHTML = `
-                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-                        加载内容失败：${error.message}
+                    <div class="bg-red-50 p-4 rounded text-red-700">
+                        加载失败: ${error.message}
                     </div>
                 `;
             }
