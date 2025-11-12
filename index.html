@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据结构与基础算法（C++版）</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        dark: '#1D2129',
+                        light: '#F2F3F5',
+                        accent: '#FF7D00'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Consolas', 'Monaco', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .nav-active {
+                @apply bg-primary/10 text-primary border-l-4 border-primary;
+            }
+            .transition-nav {
+                @apply transition-all duration-300 ease-in-out;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <div class="flex h-screen overflow-hidden">
+        <!-- 侧边导航栏 -->
+        <aside id="sidebar" class="w-64 bg-white shadow-lg z-10 hidden md:block transition-nav">
+            <!-- 网站标题 -->
+            <div class="p-6 border-b border-gray-200">
+                <h1 class="text-xl font-bold text-primary flex items-center">
+                    <i class="fa fa-code-fork mr-3"></i>
+                    数据结构与算法
+                </h1>
+                <p class="text-sm text-gray-500 mt-1">C++版教程</p>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <nav class="p-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="index.html" class="nav-active flex items-center px-4 py-3 text-sm rounded-lg transition-nav">
+                            <i class="fa fa-home w-5 text-center mr-3"></i>
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch1.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-info-circle w-5 text-center mr-3"></i>
+                            第一章：算法基础
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch2.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-list w-5 text-center mr-3"></i>
+                            第二章：线性表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch3.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-stack-overflow w-5 text-center mr-3"></i>
+                            第三章：栈与队列
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch4.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-link w-5 text-center mr-3"></i>
+                            第四章：串
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch5.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-sitemap w-5 text-center mr-3"></i>
+                            第五章：树与二叉树
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch6.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-share-alt w-5 text-center mr-3"></i>
+                            第六章：图
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch7.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-search w-5 text-center mr-3"></i>
+                            第七章：查找
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch8.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-sort w-5 text-center mr-3"></i>
+                            第八章：排序
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ch9.html" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-nav">
+                            <i class="fa fa-code w-5 text-center mr-3"></i>
+                            第九章：综合实例
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- 顶部导航 -->
+            <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+                <div class="text-lg font-medium text-gray-800">数据结构与基础算法（C++版）</div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-primary transition-colors">
+                        <i class="fa fa-search text-lg"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-primary transition-colors">
+                        <i class="fa fa-user-circle text-lg"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- 内容区域 -->
+            <div class="flex-1 overflow-y-auto p-6 md:p-10 bg-gray-50">
+                <div class="max-w-4xl mx-auto">
+                    <!-- 欢迎区域 -->
+                    <div class="bg-gradient-to-r from-primary to-primary/80 text-white rounded-2xl p-8 mb-10 shadow-lg transform hover:scale-[1.01] transition-all duration-300">
+                        <h2 class="text-3xl font-bold mb-4">欢迎学习数据结构与算法</h2>
+                        <p class="text-white/90 mb-6">本教程将带领你深入学习数据结构与基础算法的核心概念，并通过C++语言实现各种经典算法。</p>
+                        <a href="ch1.html" class="inline-flex items-center bg-white text-primary font-medium px-5 py-2.5 rounded-lg hover:bg-gray-100 transition-colors">
+                            开始学习
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 课程介绍 -->
+                    <section class="mb-12">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i class="fa fa-book text-primary mr-3"></i>
+                            课程介绍
+                        </h3>
+                        <div class="bg-white rounded-xl p-6 shadow-sm">
+                            <p class="text-gray-700 mb-4">
+                                数据结构与算法是计算机科学的基础，掌握它们对于成为一名优秀的程序员至关重要。本教程采用C++语言，
+                                系统讲解各类数据结构的设计与实现，以及常用算法的原理与应用。
+                            </p>
+                            <p class="text-gray-700">
+                                通过本课程的学习，你将能够理解并应用基本的数据结构（如数组、链表、栈、队列、树、图等），
+                                掌握常用的算法设计技巧（如递归、分治、动态规划等），并能够分析算法的时间和空间复杂度。
+                            </p>
+                        </div>
+                    </section>
+                    
+                    <!-- 章节概览 -->
+                    <section class="mb-12">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i class="fa fa-list-alt text-primary mr-3"></i>
+                            章节概览
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- 章节卡片 -->
+                            <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-primary">
+                                <h4 class="font-semibold text-lg mb-2">基础概念</h4>
+                                <p class="text-gray-600 text-sm">算法的基本概念、复杂度分析、C++基础语法回顾</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-secondary">
+                                <h4 class="font-semibold text-lg mb-2">线性结构</h4>
+                                <p class="text-gray-600 text-sm">线性表、栈、队列、串等线性数据结构的实现与应用</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-accent">
+                                <h4 class="font-semibold text-lg mb-2">非线性结构</h4>
+                                <p class="text-gray-600 text-sm">树、二叉树、图等非线性数据结构的实现与遍历</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-purple-500">
+                                <h4 class="font-semibold text-lg mb-2">算法设计</h4>
+                                <p class="text-gray-600 text-sm">查找算法、排序算法及综合实例分析</p>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- 学习目标 -->
+                    <section>
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i class="fa fa-bullseye text-primary mr-3"></i>
+                            学习目标
+                        </h3>
+                        <div class="bg-white rounded-xl p-6 shadow-sm">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>理解各种数据结构的特性和适用场景</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>掌握用C++实现常用数据结构的方法</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>学会分析算法的时间复杂度和空间复杂度</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>能够根据实际问题选择合适的算法和数据结构</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>培养解决复杂问题的思维能力和编程能力</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            
+            <!-- 页脚 -->
+            <footer class="bg-white border-t border-gray-200 py-4 px-6 text-center text-gray-500 text-sm">
+                <p>© 2025 数据结构与基础算法（C++版）教程 | powered by xsk</p>
+            </footer>
+        </main>
+    </div>
+    
+    <!-- 移动端侧边栏遮罩 -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-10 hidden md:hidden"></div>
+    
+    <script>
+        // 移动端侧边栏切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('absolute');
+            sidebar.classList.toggle('top-0');
+            sidebar.classList.toggle('left-0');
+            sidebar.classList.toggle('h-full');
+            sidebarOverlay.classList.toggle('hidden');
+        });
+        
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.add('hidden');
+            sidebar.classList.remove('absolute', 'top-0', 'left-0', 'h-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+        
+        // 导航链接点击事件（移动端）
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('hidden');
+                    sidebar.classList.remove('absolute', 'top-0', 'left-0', 'h-full');
+                    sidebarOverlay.classList.add('hidden');
+                }
+            });
+        });
+        
+        // 滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== 'index.html') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
